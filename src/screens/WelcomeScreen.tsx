@@ -1,10 +1,8 @@
 import React from 'react';
-// Change: Imported SafeAreaView for better layout on all devices
-import { View, Text, StyleSheet, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'; // Use SafeAreaView from safe-area-context
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-// Remove LinearGradient as it's not needed
-// import { LinearGradient } from 'expo-linear-gradient'; 
 import { Colors } from '../constants/Colors';
 import { RootStackParamList } from '../navigation/AppNavigator';
 
@@ -18,18 +16,13 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    // Change: Using SafeAreaView as the root component
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Change: This container will hold the top part (logo and title) and center it */}
         <View style={styles.mainContent}>
-          {/* Change: Replaced LinearGradient with a simple View for a solid color */}
-          <View style={styles.logoBackground}>
-            <Image
-              source={require('../../assets/images/whatsapp-logo.png')}
-              style={styles.logo}
-            />
-          </View>
+          <Image
+            source={require('../../assets/images/whatsapp-logo.png')}
+            style={styles.logo}
+          />
           <Text style={styles.title}>Welcome to WhatsApp</Text>
         </View>
 
@@ -47,7 +40,6 @@ const WelcomeScreen: React.FC = () => {
   );
 };
 
-// Change: Complete overhaul of the styles for a better match
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -56,61 +48,51 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingHorizontal: 20, // Add some horizontal padding
-    paddingBottom: 20, // Add padding at the bottom
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   mainContent: {
-    flex: 1, // This will take up all available space, pushing the footer down
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoBackground: {
-    width: 120,
-    height: 120,
-    borderRadius: 28, // A slightly higher radius for the "squircle" look
-    backgroundColor: Colors.primary, // Using a solid color
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
-    width: 70,
-    height: 70,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
-    tintColor: Colors.white,
   },
   title: {
-    fontSize: 32, // Increased font size for impact
+    fontSize: 32,
     fontWeight: '600',
     color: Colors.black,
-    marginTop: 40, // Spacing between logo and title
+    marginTop: 40,
   },
   footer: {
-    width: '100%', // Make footer take the full width
+    width: '100%',
     alignItems: 'center',
   },
   policyText: {
-    color: '#8696a0', // A softer color for the policy text, common in WhatsApp
+    color: '#8696a0',
     fontSize: 13,
     textAlign: 'center',
     marginBottom: 25,
     lineHeight: 20,
   },
   linkText: {
-    color: Colors.link, // Keep the link color
-    // Removed textDecorationLine to match Figma
+    color: Colors.link,
   },
   button: {
-    width: '90%', // Use percentage for better responsiveness
+    width: '90%',
     height: 50,
     backgroundColor: Colors.primary,
-    borderRadius: 25, // Half of height to make it a perfect pill
+    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonText: {
     color: Colors.white,
-    fontSize: 16, // Slightly smaller font size
-    fontWeight: '500', // Medium weight is common for buttons
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 
